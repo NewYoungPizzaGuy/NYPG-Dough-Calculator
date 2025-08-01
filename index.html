@@ -20,13 +20,13 @@
     }
     label {
       display: block;
-      margin-bottom: 0.5rem;
+      margin-top: 1rem;
       font-weight: 600;
     }
     input {
       padding: 0.5rem;
       font-size: 1rem;
-      margin-bottom: 1rem;
+      margin-top: 0.25rem;
       width: 100%;
       box-sizing: border-box;
     }
@@ -37,6 +37,7 @@
       padding: 0.75rem;
       width: 100%;
       font-size: 1rem;
+      margin-top: 1.5rem;
       cursor: pointer;
       border-radius: 4px;
     }
@@ -61,40 +62,17 @@
 </head>
 <body>
   <h1>NYPG Dough Calculator</h1>
+
   <label for="balls">How many dough balls?</label>
   <input type="number" id="balls" value="5" min="1" />
-  
+
   <label for="weight">Dough ball weight (g)</label>
   <input type="number" id="weight" value="280" min="1" />
 
-  <button onclick="calculate()">Calculate</button>
+  <label for="oil">Oil % (optional)</label>
+  <input type="number" id="oil" placeholder="e.g. 2" step="0.1" />
 
-  <div class="result" id="results" style="display: none;">
-    <h2>Total Ingredients</h2>
-    <div class="ingredient" id="flour"></div>
-    <div class="ingredient" id="water"></div>
-    <div class="ingredient" id="starter"></div>
-    <div class="ingredient" id="salt"></div>
-  </div>
+  <label for="honey">Honey % (optional)</label>
+  <input type="number" id="honey"
 
-  <script>
-    function calculate() {
-      const balls = parseInt(document.getElementById('balls').value);
-      const weight = parseFloat(document.getElementById('weight').value);
-
-      const totalDough = balls * weight;
-      const flour = totalDough / (1 + 0.70 + 0.13 + 0.03); // hydration + starter + salt
-      const water = flour * 0.70;
-      const starter = flour * 0.13;
-      const salt = flour * 0.03;
-
-      document.getElementById('flour').textContent = `Flour: ${flour.toFixed(1)}g`;
-      document.getElementById('water').textContent = `Water: ${water.toFixed(1)}g`;
-      document.getElementById('starter').textContent = `Sourdough Starter: ${starter.toFixed(1)}g`;
-      document.getElementById('salt').textContent = `Salt: ${salt.toFixed(1)}g`;
-
-      document.getElementById('results').style.display = 'block';
-    }
-  </script>
-</body>
 </html>
