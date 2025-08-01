@@ -1,22 +1,100 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NYPG Dough Calculator</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fffefa;
+      color: #333;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      width: 100%;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #444;
+    }
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .result h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .ingredient {
+      margin: 0.25rem 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>NYPG Dough Calculator</h1>
-    <label for="balls">How many dough balls?</label>
-    <input type="number" id="balls" value="1" min="1" />
-    <label for="weight">Dough ball weight (g)</label>
-    <input type="number" id="weight" value="280" />
-    <button onclick="calculate()">Calculate</button>
-    <div id="results"></div>
+  <h1>NYPG Dough Calculator</h1>
+  <label for="balls">How many dough balls?</label>
+  <input type="number" id="balls" value="5" min="1" />
+  
+  <label for="weight">Dough ball weight (g)</label>
+  <input type="number" id="weight" value="280" min="1" />
+
+  <button onclick="calculate()">Calculate</button>
+
+  <div class="result" id="results" style="display: none;">
+    <h2>Total Ingredients</h2>
+    <div class="ingredient" id="flour"></div>
+    <div class="ingredient" id="water"></div>
+    <div class="ingredient" id="starter"></div>
+    <div class="ingredient" id="salt"></div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    function calculate() {
+      const balls = parseInt(document.getElementById('balls').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+
+      const totalDough = balls * weight;
+      const flour = totalDough / (1 + 0.70 + 0.13 + 0.03); // hydration + starter + salt
+      const water = flour * 0.70;
+      const starter = flour * 0.13;
+      const salt = flour * 0.03;
+
+      document.getElementById('flour').textContent = `Flour: ${flour.toFixed(1)}g`;
+      document.getElementById('water').textContent = `Water: ${water.toFixed(1)}g`;
+      document.getElementById('starter').textContent = `Sourdough Starter: ${starter.toFixed(1)}g`;
+      document.getElementById('salt').textContent = `Salt: ${salt.toFixed(1)}g`;
+
+      document.getElementById('results').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
