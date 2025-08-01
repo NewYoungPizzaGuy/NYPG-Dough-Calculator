@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NYPG Dough Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>NYPG Dough Calculator</h1>
+    <label for="balls">How many dough balls?</label>
+    <input type="number" id="balls" value="1" min="1" />
+    <label for="weight">Dough ball weight (g)</label>
+    <input type="number" id="weight" value="280" />
+    <button onclick="calculate()">Calculate</button>
+    <div id="results"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
