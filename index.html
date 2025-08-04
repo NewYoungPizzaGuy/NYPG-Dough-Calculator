@@ -2,152 +2,182 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NYPG Dough Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, #fff9f3, #f7f1e9);
-      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      padding: 2rem;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3e7 url('https://www.transparenttextures.com/patterns/concrete-wall.png');
+      color: #3a2c1d;
+      padding: 20px;
+    }
+
+    h1 {
+      font-family: 'Shrikhand', cursive;
+      font-size: 3em;
+      margin-bottom: 5px;
+    }
+
+    .tagline {
+      font-family: 'Shrikhand', cursive;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .container {
       max-width: 700px;
       margin: auto;
-      color: #333;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
+
     label {
       display: block;
-      margin-top: 1rem;
-      font-weight: 600;
+      margin-top: 10px;
     }
-    input[type="number"] {
+
+    input {
       width: 100%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-top: 0.25rem;
-    }
-    button {
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      background-color: #222;
-      color: white;
-      border: none;
-      cursor: pointer;
+      padding: 10px;
+      margin-top: 5px;
       border-radius: 5px;
-    }
-    .results {
-      margin-top: 2rem;
-      padding: 1rem;
       border: 1px solid #ccc;
-      background: white;
+      box-sizing: border-box;
     }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1em;
+      background: #c0392b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #a93226;
+    }
+
+    .results {
+      margin-top: 30px;
+      font-weight: bold;
+    }
+
     footer {
-      margin-top: 3rem;
       text-align: center;
-      font-size: 0.85rem;
-      color: #666;
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>NYPG Dough Calculator</h1>
+  <div class="container">
+    <h1>NYPG Dough Calculator</h1>
+    <div class="tagline">Easy sourdough math for pizza makers</div>
 
-  <label for="ball1">Dough Ball 1 Weight (g):</label>
-  <input type="number" id="ball1" value="280" />
-  <label for="count1">Quantity of Dough Ball 1:</label>
-  <input type="number" id="count1" value="5" />
+    <label for="ballWeight1">Dough Ball 1 Weight (g):</label>
+    <input type="number" id="ballWeight1" placeholder="e.g. 280"/>
 
-  <label for="ball2">Dough Ball 2 Weight (g) (optional):</label>
-  <input type="number" id="ball2" />
-  <label for="count2">Quantity of Dough Ball 2:</label>
-  <input type="number" id="count2" />
+    <label for="ballCount1">Number of Dough Balls (1):</label>
+    <input type="number" id="ballCount1" value="1"/>
 
-  <label for="ball3">Dough Ball 3 Weight (g) (optional):</label>
-  <input type="number" id="ball3" />
-  <label for="count3">Quantity of Dough Ball 3:</label>
-  <input type="number" id="count3" />
+    <label for="ballWeight2">Dough Ball 2 Weight (Optional):</label>
+    <input type="number" id="ballWeight2" placeholder="e.g. 600"/>
 
-  <label for="hydration">Hydration %:</label>
-  <input type="number" id="hydration" value="70" />
+    <label for="ballCount2">Number of Dough Balls (Optional):</label>
+    <input type="number" id="ballCount2"/>
 
-  <label for="salt">Salt %:</label>
-  <input type="number" id="salt" value="3" />
+    <label for="ballWeight3">Dough Ball 3 Weight (Optional):</label>
+    <input type="number" id="ballWeight3"/>
 
-  <label for="starter">Sourdough Starter %:</label>
-  <input type="number" id="starter" value="13" />
+    <label for="ballCount3">Number of Dough Balls (Optional):</label>
+    <input type="number" id="ballCount3"/>
 
-  <label for="yeast">Dry Yeast %:</label>
-  <input type="number" id="yeast" value="0" />
+    <hr style="margin-top:30px; margin-bottom: 30px;"/>
 
-  <label for="honey">Honey % (optional):</label>
-  <input type="number" id="honey" />
+    <label for="hydration">Hydration (%):</label>
+    <input type="number" id="hydration" value="70"/>
 
-  <label for="oil">Oil % (optional):</label>
-  <input type="number" id="oil" />
+    <label for="salt">Salt (%):</label>
+    <input type="number" id="salt" value="3"/>
 
-  <button onclick="calculateDough()">Calculate</button>
-  <button onclick="downloadPDF()">Download PDF</button>
+    <label for="starter">Starter (%):</label>
+    <input type="number" id="starter" value="13"/>
 
-  <div class="results" id="results"></div>
+    <label for="yeast">Dry Yeast (%):</label>
+    <input type="number" id="yeast" value="0"/>
+
+    <label for="oil">Oil (%):</label>
+    <input type="number" id="oil" value="0"/>
+
+    <label for="honey">Honey (%):</label>
+    <input type="number" id="honey" value="0"/>
+
+    <button onclick="calculate()">Calculate</button>
+    <button onclick="downloadPDF()">Download PDF</button>
+
+    <div class="results" id="results"></div>
+  </div>
 
   <footer>
     Made by New Young Pizza Guy
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    function calculateDough() {
-      const ball1 = parseFloat(document.getElementById('ball1').value) || 0;
-      const count1 = parseInt(document.getElementById('count1').value) || 0;
-      const ball2 = parseFloat(document.getElementById('ball2').value) || 0;
-      const count2 = parseInt(document.getElementById('count2').value) || 0;
-      const ball3 = parseFloat(document.getElementById('ball3').value) || 0;
-      const count3 = parseInt(document.getElementById('count3').value) || 0;
-      const hydration = parseFloat(document.getElementById('hydration').value) || 0;
-      const salt = parseFloat(document.getElementById('salt').value) || 0;
-      const starter = parseFloat(document.getElementById('starter').value) || 0;
-      const yeast = parseFloat(document.getElementById('yeast').value) || 0;
-      const honey = parseFloat(document.getElementById('honey').value) || 0;
-      const oil = parseFloat(document.getElementById('oil').value) || 0;
+    function calculate() {
+      const ballWeights = [
+        { weight: parseFloat(document.getElementById('ballWeight1').value), count: parseInt(document.getElementById('ballCount1').value) || 0 },
+        { weight: parseFloat(document.getElementById('ballWeight2').value), count: parseInt(document.getElementById('ballCount2').value) || 0 },
+        { weight: parseFloat(document.getElementById('ballWeight3').value), count: parseInt(document.getElementById('ballCount3').value) || 0 },
+      ];
 
-      const totalWeight = (ball1 * count1) + (ball2 * count2) + (ball3 * count3);
-      const totalPercent = 100 + hydration + salt + starter + yeast + honey + oil;
-      const flour = totalWeight / (totalPercent / 100);
+      const totalDough = ballWeights.reduce((sum, bw) => sum + (bw.weight * bw.count || 0), 0);
+      const hydration = parseFloat(document.getElementById('hydration').value) / 100;
+      const salt = parseFloat(document.getElementById('salt').value) / 100;
+      const starter = parseFloat(document.getElementById('starter').value) / 100;
+      const yeast = parseFloat(document.getElementById('yeast').value) / 100;
+      const oil = parseFloat(document.getElementById('oil').value) / 100;
+      const honey = parseFloat(document.getElementById('honey').value) / 100;
 
-      const water = flour * (hydration / 100);
-      const saltWeight = flour * (salt / 100);
-      const starterWeight = flour * (starter / 100);
-      const yeastWeight = flour * (yeast / 100);
-      const honeyWeight = flour * (honey / 100);
-      const oilWeight = flour * (oil / 100);
+      const totalPercent = 1 + hydration + salt + starter + yeast + oil + honey;
+      const flour = totalDough / totalPercent;
 
-      const results = `
-        <strong>Total Dough Weight:</strong> ${totalWeight.toFixed(1)} g<br/>
-        <strong>Flour:</strong> ${flour.toFixed(1)} g<br/>
-        <strong>Water:</strong> ${water.toFixed(1)} g<br/>
-        <strong>Salt:</strong> ${saltWeight.toFixed(1)} g<br/>
-        <strong>Starter:</strong> ${starterWeight.toFixed(1)} g<br/>
-        <strong>Dry Yeast:</strong> ${yeastWeight.toFixed(1)} g<br/>
-        ${honey ? `<strong>Honey:</strong> ${honeyWeight.toFixed(1)} g<br/>` : ''}
-        ${oil ? `<strong>Oil:</strong> ${oilWeight.toFixed(1)} g<br/>` : ''}
-      `;
+      const results = {
+        Flour: flour.toFixed(1) + ' g',
+        Water: (flour * hydration).toFixed(1) + ' g',
+        Salt: (flour * salt).toFixed(1) + ' g',
+        Starter: (flour * starter).toFixed(1) + ' g',
+        'Dry Yeast': (flour * yeast).toFixed(1) + ' g',
+        Oil: (flour * oil).toFixed(1) + ' g',
+        Honey: (flour * honey).toFixed(1) + ' g',
+        'Total Dough': totalDough.toFixed(1) + ' g'
+      };
 
-      document.getElementById('results').innerHTML = results;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = Object.entries(results).map(([k, v]) => `<p>${k}: ${v}</p>`).join('');
     }
 
-    function downloadPDF() {
+    async function downloadPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      const content = document.getElementById('results').innerHTML.replace(/<br\/>/g, '\n').replace(/<[^>]*>?/gm, '');
-      doc.text(content, 10, 10);
-      doc.save('dough-calculation.pdf');
+      doc.setFontSize(16);
+      doc.text("NYPG Dough Calculator", 10, 20);
+
+      const resultText = document.getElementById('results').innerText;
+      const lines = doc.splitTextToSize(resultText, 180);
+      doc.setFontSize(12);
+      doc.text(lines, 10, 40);
+      doc.save("nypg_dough_calculator.pdf");
     }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
