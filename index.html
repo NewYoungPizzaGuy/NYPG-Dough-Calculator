@@ -63,4 +63,55 @@
 
   <label>
     Oil (%) – optional
-    <input type="number" id="oil"
+    <input type="number" id="oil" value="0" />
+  </label>
+
+  <label>
+    Honey (%) – optional
+    <input type="number" id="honey" value="0" />
+  </label>
+
+  <button onclick="calculateDough()">Calculate</button>
+
+  <div class="results" id="results"></div>
+
+  <script>
+    function calculateDough() {
+      const numBalls = parseFloat(document.getElementById("numBalls").value);
+      const ballWeight = parseFloat(document.getElementById("ballWeight").value);
+      const hydration = parseFloat(document.getElementById("hydration").value);
+      const starter = parseFloat(document.getElementById("starter").value);
+      const salt = parseFloat(document.getElementById("salt").value);
+      const oil = parseFloat(document.getElementById("oil").value);
+      const honey = parseFloat(document.getElementById("honey").value);
+
+      const totalDoughWeight = numBalls * ballWeight;
+
+      const totalPercent =
+        100 +
+        hydration +
+        starter +
+        salt +
+        (oil || 0) +
+        (honey || 0);
+
+      const flourWeight = totalDoughWeight * (100 / totalPercent);
+      const waterWeight = flourWeight * (hydration / 100);
+      const starterWeight = flourWeight * (starter / 100);
+      const saltWeight = flourWeight * (salt / 100);
+      const oilWeight = flourWeight * (oil / 100);
+      const honeyWeight = flourWeight * (honey / 100);
+
+      document.getElementById("results").innerHTML = `
+        <strong>Total dough weight:</strong> ${totalDoughWeight.toFixed(1)}g<br/>
+        <strong>Flour:</strong> ${flourWeight.toFixed(1)}g<br/>
+        <strong>Water:</strong> ${waterWeight.toFixed(1)}g<br/>
+        <strong>Starter:</strong> ${starterWeight.toFixed(1)}g<br/>
+        <strong>Salt:</strong> ${saltWeight.toFixed(1)}g<br/>
+        <strong>Oil:</strong> ${oilWeight.toFixed(1)}g<br/>
+        <strong>Honey:</strong> ${honeyWeight.toFixed(1)}g
+      `;
+    }
+  </script>
+</body>
+</html>
