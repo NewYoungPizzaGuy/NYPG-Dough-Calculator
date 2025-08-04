@@ -5,15 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NYPG Dough Calculator</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto Slab', serif;
+      background: #fffaf2;
       padding: 40px;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
+      color: #333;
     }
     h1 {
-      font-size: 2em;
+      font-size: 2.5em;
       margin-bottom: 0.5em;
+      text-align: center;
+      letter-spacing: 1px;
     }
     label {
       display: block;
@@ -25,21 +31,29 @@
       padding: 10px;
       font-size: 1em;
       margin-top: 0.2em;
+      border: 2px solid #333;
+      border-radius: 6px;
+      background: #fff;
     }
     button {
       margin-top: 1.5em;
       padding: 12px 24px;
       font-size: 1em;
-      background-color: black;
-      color: white;
+      background-color: #000;
+      color: #fff;
       border: none;
+      border-radius: 8px;
       cursor: pointer;
+      display: block;
+      width: 100%;
     }
     .results {
       margin-top: 2em;
-      background: #f8f8f8;
+      background: #fff;
+      border: 2px solid #000;
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 12px;
+      font-size: 1.1em;
     }
   </style>
 </head>
@@ -68,19 +82,19 @@
   <label>Hydration (%)</label>
   <input type="number" id="hydration" value="70" />
 
-  <label>Starter (%) – optional</label>
+  <label>Starter (%)</label>
   <input type="number" id="starter" value="13" />
 
   <label>Salt (%)</label>
   <input type="number" id="salt" value="3" />
 
-  <label>Oil (%) – optional</label>
+  <label>Oil (%)</label>
   <input type="number" id="oil" placeholder="e.g. 2" />
 
-  <label>Honey (%) – optional</label>
+  <label>Honey (%)</label>
   <input type="number" id="honey" placeholder="e.g. 2" />
 
-  <label>Dry Yeast (g) – optional</label>
+  <label>Dry Yeast (g)</label>
   <input type="number" id="yeast" placeholder="e.g. 2" />
 
   <button onclick="calculateDough()">Calculate</button>
