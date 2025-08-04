@@ -6,73 +6,61 @@
   <title>NYPG Dough Calculator</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fffefa;
-      color: #333;
-      padding: 2rem;
+      font-family: Arial, sans-serif;
       max-width: 600px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
     }
     label {
       display: block;
-      margin-top: 1rem;
-      font-weight: 600;
+      margin-top: 10px;
     }
-    input {
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-top: 0.25rem;
+    input[type="number"] {
       width: 100%;
-      box-sizing: border-box;
+      padding: 8px;
+      margin-top: 4px;
     }
     button {
-      background-color: black;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      width: 100%;
-      font-size: 1rem;
-      margin-top: 1.5rem;
-      cursor: pointer;
-      border-radius: 4px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
     }
-    button:hover {
-      background-color: #444;
-    }
-    .result {
-      margin-top: 2rem;
-      padding: 1rem;
-      background: #f4f4f4;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-    .result h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    .ingredient {
-      margin: 0.25rem 0;
+    .results {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
   <h1>NYPG Dough Calculator</h1>
 
-  <label for="balls">How many dough balls?</label>
-  <input type="number" id="balls" value="5" min="1" />
+  <label>
+    How many dough balls?
+    <input type="number" id="numBalls" value="5" />
+  </label>
 
-  <label for="weight">Dough ball weight (g)</label>
-  <input type="number" id="weight" value="280" min="1" />
+  <label>
+    Dough ball weight (g)
+    <input type="number" id="ballWeight" value="280" />
+  </label>
 
-  <label for="oil">Oil % (optional)</label>
-  <input type="number" id="oil" placeholder="e.g. 2" step="0.1" />
+  <label>
+    Hydration (%) 
+    <input type="number" id="hydration" value="70" />
+  </label>
 
-  <label for="honey">Honey % (optional)</label>
-  <input type="number" id="honey"
+  <label>
+    Starter (%) 
+    <input type="number" id="starter" value="13" />
+  </label>
 
-</html>
+  <label>
+    Salt (%) 
+    <input type="number" id="salt" value="3" />
+  </label>
+
+  <label>
+    Oil (%) – optional
+    <input type="number" id="oil"
