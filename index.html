@@ -7,111 +7,116 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      padding: 40px;
       max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      line-height: 1.6;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
     }
     label {
       display: block;
-      margin-top: 10px;
+      margin-top: 1em;
+      font-weight: bold;
     }
-    input[type="number"] {
+    input {
       width: 100%;
-      padding: 8px;
-      margin-top: 4px;
+      padding: 10px;
+      font-size: 1em;
+      margin-top: 0.2em;
     }
     button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+      margin-top: 1.5em;
+      padding: 12px 24px;
+      font-size: 1em;
+      background-color: black;
+      color: white;
+      border: none;
+      cursor: pointer;
     }
     .results {
-      margin-top: 30px;
-      padding: 15px;
-      border: 1px solid #ccc;
+      margin-top: 2em;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
+
   <h1>NYPG Dough Calculator</h1>
 
-  <label>
-    How many dough balls?
-    <input type="number" id="numBalls" value="5" />
-  </label>
+  <label>Dough Ball 1 Weight (g)</label>
+  <input type="number" id="weight1" value="280" />
 
-  <label>
-    Dough ball weight (g)
-    <input type="number" id="ballWeight" value="280" />
-  </label>
+  <label>Dough Ball 1 Quantity</label>
+  <input type="number" id="qty1" value="5" />
 
-  <label>
-    Hydration (%) 
-    <input type="number" id="hydration" value="70" />
-  </label>
+  <label>Dough Ball 2 Weight (g) – optional</label>
+  <input type="number" id="weight2" placeholder="e.g. 600" />
 
-  <label>
-    Starter (%) 
-    <input type="number" id="starter" value="13" />
-  </label>
+  <label>Dough Ball 2 Quantity</label>
+  <input type="number" id="qty2" placeholder="e.g. 1" />
 
-  <label>
-    Salt (%) 
-    <input type="number" id="salt" value="3" />
-  </label>
+  <label>Dough Ball 3 Weight (g) – optional</label>
+  <input type="number" id="weight3" placeholder="e.g. 350" />
 
-  <label>
-    Oil (%) – optional
-    <input type="number" id="oil" value="0" />
-  </label>
+  <label>Dough Ball 3 Quantity</label>
+  <input type="number" id="qty3" placeholder="e.g. 2" />
 
-  <label>
-    Honey (%) – optional
-    <input type="number" id="honey" value="0" />
-  </label>
+  <label>Hydration (%)</label>
+  <input type="number" id="hydration" value="70" />
+
+  <label>Starter (%)</label>
+  <input type="number" id="starter" value="13" />
+
+  <label>Salt (%)</label>
+  <input type="number" id="salt" value="3" />
+
+  <label>Oil (%) – optional</label>
+  <input type="number" id="oil" placeholder="e.g. 2" />
 
   <button onclick="calculateDough()">Calculate</button>
 
-  <div class="results" id="results"></div>
+  <div id="results" class="results" style="display: none;"></div>
 
   <script>
     function calculateDough() {
-      const numBalls = parseFloat(document.getElementById("numBalls").value);
-      const ballWeight = parseFloat(document.getElementById("ballWeight").value);
-      const hydration = parseFloat(document.getElementById("hydration").value);
-      const starter = parseFloat(document.getElementById("starter").value);
-      const salt = parseFloat(document.getElementById("salt").value);
-      const oil = parseFloat(document.getElementById("oil").value);
-      const honey = parseFloat(document.getElementById("honey").value);
+      const weight1 = parseFloat(document.getElementById("weight1").value) || 0;
+      const qty1 = parseFloat(document.getElementById("qty1").value) || 0;
+      const weight2 = parseFloat(document.getElementById("weight2").value) || 0;
+      const qty2 = parseFloat(document.getElementById("qty2").value) || 0;
+      const weight3 = parseFloat(document.getElementById("weight3").value) || 0;
+      const qty3 = parseFloat(document.getElementById("qty3").value) || 0;
 
-      const totalDoughWeight = numBalls * ballWeight;
+      const hydration = parseFloat(document.getElementById("hydration").value) || 0;
+      const starter = parseFloat(document.getElementById("starter").value) || 0;
+      const salt = parseFloat(document.getElementById("salt").value) || 0;
+      const oil = parseFloat(document.getElementById("oil").value) || 0;
 
-      const totalPercent =
-        100 +
-        hydration +
-        starter +
-        salt +
-        (oil || 0) +
-        (honey || 0);
+      const totalDoughWeight = (weight1 * qty1) + (weight2 * qty2) + (weight3 * qty3);
+      const totalPercent = 100 + hydration + starter + salt + oil;
+      const flour = totalDoughWeight * (100 / totalPercent);
+      const water = flour * (hydration / 100);
+      const starterGrams = flour * (starter / 100);
+      const saltGrams = flour * (salt / 100);
+      const oilGrams = oil > 0 ? flour * (oil / 100) : 0;
 
-      const flourWeight = totalDoughWeight * (100 / totalPercent);
-      const waterWeight = flourWeight * (hydration / 100);
-      const starterWeight = flourWeight * (starter / 100);
-      const saltWeight = flourWeight * (salt / 100);
-      const oilWeight = flourWeight * (oil / 100);
-      const honeyWeight = flourWeight * (honey / 100);
-
-      document.getElementById("results").innerHTML = `
-        <strong>Total dough weight:</strong> ${totalDoughWeight.toFixed(1)}g<br/>
-        <strong>Flour:</strong> ${flourWeight.toFixed(1)}g<br/>
-        <strong>Water:</strong> ${waterWeight.toFixed(1)}g<br/>
-        <strong>Starter:</strong> ${starterWeight.toFixed(1)}g<br/>
-        <strong>Salt:</strong> ${saltWeight.toFixed(1)}g<br/>
-        <strong>Oil:</strong> ${oilWeight.toFixed(1)}g<br/>
-        <strong>Honey:</strong> ${honeyWeight.toFixed(1)}g
+      const results = `
+        <strong>Total Dough Weight:</strong> ${totalDoughWeight.toFixed(1)}g<br><br>
+        <strong>Flour:</strong> ${flour.toFixed(1)}g<br>
+        <strong>Water:</strong> ${water.toFixed(1)}g<br>
+        <strong>Starter:</strong> ${starterGrams.toFixed(1)}g<br>
+        <strong>Salt:</strong> ${saltGrams.toFixed(1)}g<br>
+        ${oil > 0 ? `<strong>Oil:</strong> ${oilGrams.toFixed(1)}g<br>` : ""}
       `;
+
+      const resultDiv = document.getElementById("results");
+      resultDiv.innerHTML = results;
+      resultDiv.style.display = "block";
     }
   </script>
+
 </body>
 </html>
