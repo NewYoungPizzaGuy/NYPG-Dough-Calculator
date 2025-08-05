@@ -171,6 +171,21 @@
       resultsDiv.innerHTML = results;
       resultsDiv.style.display = 'block';
     }
+    // Save input values to localStorage
+const inputs = document.querySelectorAll('input');
+
+inputs.forEach(input => {
+  // Load saved values
+  const savedValue = localStorage.getItem(input.id);
+  if (savedValue !== null) {
+    input.value = savedValue;
+  }
+
+  // Save changes
+  input.addEventListener('input', () => {
+    localStorage.setItem(input.id, input.value);
+  });
+});
   </script>
 </body>
 </html>
