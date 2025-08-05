@@ -180,6 +180,17 @@ inputs.forEach(input => {
   if (savedValue !== null) {
     input.value = savedValue;
   }
+  window.onload = function () {
+  // Set default values
+  document.getElementById('weight1').value = 280;
+  document.getElementById('balls1').value = 3;
+  document.getElementById('hydration').value = 70;
+  document.getElementById('starter').value = 13;
+  document.getElementById('salt').value = 3;
+
+  // Auto-run the calculation
+  calculateDough();
+};
 
   // Save changes
   input.addEventListener('input', () => {
