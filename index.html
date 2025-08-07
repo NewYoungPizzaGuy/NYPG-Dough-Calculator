@@ -133,74 +133,73 @@
   <footer>Made by New Young Pizza Guy</footer>
 
   <script>
-    function calculateDough() {
-      const dough1 = Number(document.getElementById('dough1').value) || 0;
-      const num1 = Number(document.getElementById('num1').value) || 0;
-      const dough2 = Number(document.getElementById('dough2').value) || 0;
-      const num2 = Number(document.getElementById('num2').value) || 0;
-      const dough3 = Number(document.getElementById('dough3').value) || 0;
-      const num3 = Number(document.getElementById('num3').value) || 0;
+  function calculateDough() {
+    const dough1 = Number(document.getElementById('dough1').value) || 0;
+    const num1 = Number(document.getElementById('num1').value) || 0;
+    const dough2 = Number(document.getElementById('dough2').value) || 0;
+    const num2 = Number(document.getElementById('num2').value) || 0;
+    const dough3 = Number(document.getElementById('dough3').value) || 0;
+    const num3 = Number(document.getElementById('num3').value) || 0;
 
-      const hydration = Number(document.getElementById('hydration').value) || 0;
-      const salt = Number(document.getElementById('salt').value) || 0;
-      const starter = Number(document.getElementById('starter').value) || 0;
-      const yeast = Number(document.getElementById('yeast').value) || 0;
-      const oil = Number(document.getElementById('oil').value) || 0;
-      const honey = Number(document.getElementById('honey').value) || 0;
+    const hydration = Number(document.getElementById('hydration').value) || 0;
+    const salt = Number(document.getElementById('salt').value) || 0;
+    const starter = Number(document.getElementById('starter').value) || 0;
+    const yeast = Number(document.getElementById('yeast').value) || 0;
+    const oil = Number(document.getElementById('oil').value) || 0;
+    const honey = Number(document.getElementById('honey').value) || 0;
 
-      const totalDoughWeight = (dough1 * num1) + (dough2 * num2) + (dough3 * num3);
-      const totalPercent = 100 + hydration + salt + starter + yeast + oil + honey;
+    const totalDoughWeight = (dough1 * num1) + (dough2 * num2) + (dough3 * num3);
+    const totalPercent = 100 + hydration + salt + starter + yeast + oil + honey;
 
-      const flour = (totalDoughWeight * 100) / totalPercent;
-      const water = flour * (hydration / 100);
-      const saltAmt = flour * (salt / 100);
-      const starterAmt = flour * (starter / 100);
-      const yeastAmt = flour * (yeast / 100);
-      const oilAmt = flour * (oil / 100);
-      const honeyAmt = flour * (honey / 100);
+    const flour = (totalDoughWeight * 100) / totalPercent;
+    const water = flour * (hydration / 100);
+    const saltAmt = flour * (salt / 100);
+    const starterAmt = flour * (starter / 100);
+    const yeastAmt = flour * (yeast / 100);
+    const oilAmt = flour * (oil / 100);
+    const honeyAmt = flour * (honey / 100);
 
-      const results = `
-        <strong>Total Dough Weight:</strong> ${totalDoughWeight.toFixed(1)}g<br><br>
-        <strong>Flour:</strong> ${flour.toFixed(1)}g<br>
-        <strong>Water:</strong> ${water.toFixed(1)}g<br>
-        <strong>Salt:</strong> ${saltAmt.toFixed(1)}g<br>
-        <strong>Starter:</strong> ${starterAmt.toFixed(1)}g<br>
-        <strong>Dry Yeast:</strong> ${yeastAmt.toFixed(2)}g<br>
-        <strong>Oil:</strong> ${oilAmt.toFixed(1)}g<br>
-        <strong>Honey:</strong> ${honeyAmt.toFixed(1)}g
-      `;
+    const results = `
+      <strong>Total Dough Weight:</strong> ${Math.round(totalDoughWeight)}g<br><br>
+      <strong>Flour:</strong> ${Math.round(flour)}g<br>
+      <strong>Water:</strong> ${Math.round(water)}g<br>
+      <strong>Salt:</strong> ${Math.round(saltAmt)}g<br>
+      <strong>Starter:</strong> ${Math.round(starterAmt)}g<br>
+      <strong>Dry Yeast:</strong> ${yeastAmt.toFixed(2)}g<br>
+      <strong>Oil:</strong> ${Math.round(oilAmt)}g<br>
+      <strong>Honey:</strong> ${Math.round(honeyAmt)}g
+    `;
 
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = results;
-      resultsDiv.style.display = 'block';
-    }
-    // Save input values to localStorage
-const inputs = document.querySelectorAll('input');
-
-inputs.forEach(input => {
-  // Load saved values
-  const savedValue = localStorage.getItem(input.id);
-  if (savedValue !== null) {
-    input.value = savedValue;
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = results;
+    resultsDiv.style.display = 'block';
   }
-  window.onload = function () {
-  // Set default values
-  document.getElementById('weight1').value = 280;
-  document.getElementById('balls1').value = 3;
-  document.getElementById('hydration').value = 70;
-  document.getElementById('starter').value = 13;
-  document.getElementById('salt').value = 3;
 
-  // Auto-run the calculation
-  calculateDough();
-};
+  // Save and load input values using localStorage
+  const inputs = document.querySelectorAll('input');
 
-  // Save changes
-  input.addEventListener('input', () => {
-    localStorage.setItem(input.id, input.value);
+  inputs.forEach(input => {
+    const savedValue = localStorage.getItem(input.id);
+    if (savedValue !== null) {
+      input.value = savedValue;
+    }
+
+    input.addEventListener('input', () => {
+      localStorage.setItem(input.id, input.value);
+    });
   });
-});
-  </script>
+
+  // Set default values and auto-calculate on load
+  window.onload = function () {
+    if (!localStorage.getItem('dough1')) document.getElementById('dough1').value = 280;
+    if (!localStorage.getItem('num1')) document.getElementById('num1').value = 3;
+    if (!localStorage.getItem('hydration')) document.getElementById('hydration').value = 70;
+    if (!localStorage.getItem('starter')) document.getElementById('starter').value = 13;
+    if (!localStorage.getItem('salt')) document.getElementById('salt').value = 3;
+
+    calculateDough();
+  };
+</script>
 </body>
 </html>
 
