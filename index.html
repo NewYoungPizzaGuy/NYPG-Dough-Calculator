@@ -106,6 +106,9 @@
     <label for="hydration">Hydration %</label>
     <input type="number" id="hydration" placeholder="e.g. 70" />
 
+    <label for="starter">Sourdough Starter %</label>
+    <input type="number" id="starter" placeholder="e.g. 13" />
+
     <label for="salt">Salt %</label>
     <input type="number" id="salt" placeholder="e.g. 3" />
     
@@ -165,17 +168,6 @@
         <strong>Dry Yeast:</strong> ${yeastAmt.toFixed(2)}g<br>
         <strong>Oil:</strong> ${oilAmt.toFixed(1)}g<br>
         <strong>Honey:</strong> ${honeyAmt.toFixed(1)}g
-
-         window.onload = function () {
-  // Set default values
-  document.getElementById('weight1').value = 280;
-  document.getElementById('balls1').value = 3;
-  document.getElementById('hydration').value = 70;
-  document.getElementById('starter').value = 13;
-  document.getElementById('salt').value = 3;
-
-  // Auto-run the calculation
-  calculateDough();
       `;
 
       const resultsDiv = document.getElementById('results');
@@ -191,7 +183,16 @@ inputs.forEach(input => {
   if (savedValue !== null) {
     input.value = savedValue;
   }
- 
+  window.onload = function () {
+  // Set default values
+  document.getElementById('weight1').value = 280;
+  document.getElementById('balls1').value = 3;
+  document.getElementById('hydration').value = 70;
+  document.getElementById('starter').value = 13;
+  document.getElementById('salt').value = 3;
+
+  // Auto-run the calculation
+  calculateDough();
 };
 
   // Save changes
@@ -202,5 +203,4 @@ inputs.forEach(input => {
   </script>
 </body>
 </html>
-
 
