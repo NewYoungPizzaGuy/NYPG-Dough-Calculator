@@ -47,18 +47,13 @@
       font-weight: bold;
     }
 
-    input[type="number"] {
+    input {
       width: 100%;
       padding: 8px;
       margin-top: 4px;
       box-sizing: border-box;
       border-radius: 5px;
       border: 1px solid #ccc;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      margin-top: 5px;
     }
 
     button {
@@ -100,51 +95,39 @@
   <div class="calculator">
     <label for="dough1">Dough Ball 1 Weight (g)</label>
     <input type="number" id="dough1" placeholder="e.g. 280" />
-    <input type="range" id="dough1-slider" min="0" max="2000" step="1">
 
     <label for="num1">Number of Dough Balls (1)</label>
     <input type="number" id="num1" placeholder="e.g. 5" />
-    <input type="range" id="num1-slider" min="0" max="50" step="1">
 
     <label for="dough2">Dough Ball 2 Weight (g) (optional)</label>
     <input type="number" id="dough2" placeholder="e.g. 600" />
-    <input type="range" id="dough2-slider" min="0" max="2000" step="1">
 
     <label for="num2">Number of Dough Balls (2)</label>
     <input type="number" id="num2" placeholder="e.g. 1" />
-    <input type="range" id="num2-slider" min="0" max="50" step="1">
 
     <label for="dough3">Dough Ball 3 Weight (g) (optional)</label>
     <input type="number" id="dough3" placeholder="e.g. 250" />
-    <input type="range" id="dough3-slider" min="0" max="2000" step="1">
 
     <label for="num3">Number of Dough Balls (3)</label>
     <input type="number" id="num3" placeholder="e.g. 1" />
-    <input type="range" id="num3-slider" min="0" max="50" step="1">
 
     <label for="hydration">Hydration %</label>
     <input type="number" id="hydration" placeholder="e.g. 70" />
-    <input type="range" id="hydration-slider" min="0" max="100" step="1">
 
     <label for="salt">Salt %</label>
     <input type="number" id="salt" placeholder="e.g. 3" />
-    <input type="range" id="salt-slider" min="0" max="10" step="0.1">
 
-    <label for="starter">Sourdough Starter %</label>
+     <label for="starter">Sourdough Starter %</label>
     <input type="number" id="starter" placeholder="e.g. 13" />
-    <input type="range" id="starter-slider" min="0" max="100" step="0.1">
 
     <label for="yeast">Dry Yeast % (optional)</label>
     <input type="number" id="yeast" placeholder="e.g. 0.2" />
-    <input type="range" id="yeast-slider" min="0" max="5" step="0.01">
 
     <label for="oil">Oil % (optional)</label>
     <input type="number" id="oil" placeholder="e.g. 2" />
-    <input type="range" id="oil-slider" min="0" max="20" step="0.1">
 
     <label for="honey">Honey % (optional)</label>
     <input type="number" id="honey" placeholder="e.g. 2" />
-    <input type="range" id="honey-slider" min="0" max="20" step="0.1">
 
     <button onclick="calculateDough()">Calculate</button>
     <button onclick="window.print()">Print PDF</button>
@@ -197,55 +180,21 @@
     resultsDiv.style.display = 'block';
   }
 
-  // Sync sliders with inputs
-  function bindSlider(inputId, sliderId) {
-    const input = document.getElementById(inputId);
-    const slider = document.getElementById(sliderId);
+  // Save and load input values using localStorage
+  const inputs = document.querySelectorAll('input');
 
-    // Set initial slider value from input
-    slider.value = input.value || 0;
-
-    // Input changes slider
-    input.addEventListener('input', () => {
-      slider.value = input.value;
-      localStorage.setItem(input.id, input.value);
-      calculateDough();
-    });
-
-    // Slider changes input
-    slider.addEventListener('input', () => {
-      input.value = slider.value;
-      localStorage.setItem(input.id, input.value);
-      calculateDough();
-    });
-  }
-
-  // Save/load inputs
-  const inputs = document.querySelectorAll('input[type="number"]');
   inputs.forEach(input => {
     const savedValue = localStorage.getItem(input.id);
     if (savedValue !== null) {
       input.value = savedValue;
     }
+
+    input.addEventListener('input', () => {
+      localStorage.setItem(input.id, input.value);
+    });
   });
 
-  // Bind all sliders
-  [
-    ['dough1', 'dough1-slider'],
-    ['num1', 'num1-slider'],
-    ['dough2', 'dough2-slider'],
-    ['num2', 'num2-slider'],
-    ['dough3', 'dough3-slider'],
-    ['num3', 'num3-slider'],
-    ['hydration', 'hydration-slider'],
-    ['salt', 'salt-slider'],
-    ['starter', 'starter-slider'],
-    ['yeast', 'yeast-slider'],
-    ['oil', 'oil-slider'],
-    ['honey', 'honey-slider']
-  ].forEach(pair => bindSlider(...pair));
-
-  // Set defaults if none saved
+  // Set default values and auto-calculate on load
   window.onload = function () {
     if (!localStorage.getItem('dough1')) document.getElementById('dough1').value = 280;
     if (!localStorage.getItem('num1')) document.getElementById('num1').value = 4;
@@ -253,14 +202,11 @@
     if (!localStorage.getItem('starter')) document.getElementById('starter').value = 13;
     if (!localStorage.getItem('salt')) document.getElementById('salt').value = 3;
 
-    // Update sliders from inputs
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-      const slider = document.getElementById(input.id + '-slider');
-      if (slider) slider.value = input.value;
-    });
-
     calculateDough();
   };
-  </script>
+</script>
 </body>
 </html>
+</html>
+
+
